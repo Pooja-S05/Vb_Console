@@ -4,13 +4,56 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- master
+  branches:
+    include:
+      - main  # Branch to trigger the pipeline
 
-pool:
-  vmImage: 'windows-latest'
+stages:
+  - stage: Build
+    displayName: 'Build Stage'
+    jobs:
+      - job: BuildJob
+        displayName: 'Build Job'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: |
+              echo 'Performing build steps...'
+              # Add your build commands here
 
-steps:
-  - script: Hii
+  - stage: Test
+    displayName: 'Test Stage'
+    dependsOn: Build
+    jobs:
+      - job: UnitTestsJob
+        displayName: 'Run Unit Tests'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: |
+              echo 'Running unit tests...'
+              # Add your unit test commands here
 
+      - job: IntegrationTestsJob
+        displayName: 'Run Integration Tests'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: |
+              echo 'Running integration tests...'
+              # Add your integration test commands here
+
+  - stage: Deploy
+    displayName: 'Deployment Stage'
+    dependsOn: Test
+    jobs:
+      - job: DeployJob
+        displayName: 'Deploy to Production'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: |
+              echo 'Performing deployment...'
+              # Add your deployment commands here
 
 
