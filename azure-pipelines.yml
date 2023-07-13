@@ -9,13 +9,14 @@ jobs:
   pool:
     vmImage: 'windows-latest'
   steps:
+  - checkout: self
   - task: UseDotNet@2
     displayName: 'Install .NET Core SDK'
     inputs:
       version: '3.x'
   - script: dotnet build --configuration Release
     displayName: 'Build Console Application'
-    workingDirectory: path/to/your/console/app
+    workingDirectory: '$(Build.SourcesDirectory)'
   - script: dotnet run --configuration Release --project path/to/your/console/app.csproj
     displayName: 'Run Console Application'
-    workingDirectory: path/to/your/console/app
+    workingDirectory: '$(Build.SourcesDirectory)'
