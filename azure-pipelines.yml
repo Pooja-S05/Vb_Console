@@ -3,10 +3,6 @@
 # Add steps that publish symbols, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
-trigger:
-  branches:
-    include:
-      - main  # Branch to trigger the pipeline
 jobs:
 - job: RunConsoleApp
   displayName: 'Run Console Application'
