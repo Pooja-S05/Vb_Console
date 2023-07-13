@@ -20,5 +20,3 @@ stages:
           - script: |
               echo 'Performing build steps...'
               # Add your build commands here
-
-  -
