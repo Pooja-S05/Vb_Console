@@ -15,14 +15,6 @@ jobs:
     vmImage: 'windows-latest'
   steps:
   - checkout: self
-  - task: UseDotNet@2
-    displayName: 'Install .NET Core SDK'
-    inputs:
-      version: '6.0.xxx'
-  - task: NuGetToolInstaller@1
-    displayName: 'Install NuGet'
-    inputs:
-      versionSpec: 'latest'
   - task: NuGetCommand@2
     displayName: 'Restore NuGet Packages'
     inputs:
