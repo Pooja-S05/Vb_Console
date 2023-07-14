@@ -8,10 +8,8 @@ variables:
   minor: 0
   patch: $(Build.BuildID)
   buildVer: $(major).$(minor).$(Build.BuildID)
-  -task: NuGetCommand@2
+  -task: PublishBuildArtifacts@1
   inputs:
-    command: 'pack'
-    packagesToPack: '$(System.DefaultWorkingDirectory)/PowerShellModuleProject.nuspec'
-    versioningScheme: byEnvVar
-    versionEnvVar: buildVer
-    buildProperties: 'VERSIONHERE=$(buildVer)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'NuGetPackage'
+    publishLocation: 'Container'
